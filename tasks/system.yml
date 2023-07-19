@@ -1,0 +1,45 @@
+- name: install system packages
+  dnf: name={{item}}
+  with_items:
+    - curl
+    - make
+    - cmake
+    - util-linux-user
+    - which
+    - ninja-build
+    - gcc
+    - unzip
+    - gettext
+    - git
+    - python3-pip
+    - dnf-plugins-core
+    - wget
+  tags:
+    - install
+    - system
+
+- name: add rpm fusion packages
+  shell: dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+  tags:
+    - install
+    - system
+
+- name: install appstream metadata
+  shell: dnf groupupdate -y core
+  tags:
+    - install
+    - system
+
+- name: install other useful packages
+  dnf: name={{item}}
+  with_items: 
+    - tmux
+    - fzf
+    - xclip
+    - tldr
+    - stow
+    - alacritty
+    - i3
+  tags:
+    - install
+    - system

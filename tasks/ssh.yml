@@ -1,0 +1,68 @@
+- name: check if ssh was initialized
+  shell: "find {{ dest_key }}"
+  register: ssh_initialized
+  ignore_errors: true
+  tags: 
+    - install
+    - ssh
+    - dotfiles
+
+- name: ensure .ssh exists
+  when: ssh_initialized is failed
+  become_user: root
+  file:
+    dest: "{{ dest_key | dirname }}"
+    mode: 0700
+    state: directory
+  tags:
+    - install
+    - ssh
+    - dotfiles
+
+- name: copy config
+  when: ssh_initialized is failed
+  become_user: root
+  copy: 
+    src: "{{ source_config }}"
+    dest: "{{ dest_config }}"
+    mode: 0644
+  tags: 
+    - install
+    - ssh
+    - dotfiles
+
+- name: copy public ssh key
+  when: ssh_initialized is failed
+  become_user: root
+  copy: 
+    src: "{{ source_key }}.pub"
+    dest: "{{ dest_key }}.pub"
+    mode: 0644
+  tags: 
+    - install
+    - ssh
+    - dotfiles
+
+- name: copy ssh key
+  when: ssh_initialized is failed
+  become_user: root
+  copy:
+    src: "{{ source_key }}"
+    dest: "{{ dest_key }}"
+    mode: 0600
+  tags: 
+    - install
+    - ssh
+    - dotfiles
+
+- name: set authorized from file
+  when: ssh_initialized is failed
+  authorized_key:
+    # user: "{{ lookup('env', 'HOME') }}"
+    user: root
+    state: present
+    key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/github.pub') }}"
+  tags:
+    - install
+    - ssh
+    - dotfiles

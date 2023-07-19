@@ -1,0 +1,41 @@
+- name: check if docker is installed
+  shell: command -v docker
+  register: docker_exists
+  ignore_errors: true
+  tags: 
+    - install
+    - docker
+
+- name: add docker repo
+  when: docker_exists is failed
+  shell: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+  tags:
+    - install
+    - docker
+
+- name: install docker
+  when: docker_exists is failed
+  dnf: name={{item}}
+  with_items: 
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-buildx-plugin
+    - docker-compose-plugin
+  tags:
+    - install
+    - docker
+
+- name: start docker on boot
+  when: docker_exists is failed
+  shell: systemctl enable docker.service containerd.service
+  tags: 
+    - install
+    - docker
+
+- name: add user to docker group
+  when: docker_exists is failed
+  shell: "usermod -aG docker {{ lookup('env', 'USER') }}"
+  tags: 
+    - install
+    - docker

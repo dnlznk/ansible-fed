@@ -1,0 +1,22 @@
+- name: check zsh is installed
+  shell: command -v zsh
+  register: zsh_exists
+  ignore_errors: true
+  tags: 
+    - install
+    - zsh
+
+- name: install zsh
+  when: zsh_exists is failed
+  dnf:
+    name: zsh
+  tags:
+    - install
+    - zsh
+
+- name: change shell
+  shell: chsh -s $(which zsh)
+  when: zsh_exists is failed
+  tags:
+    - install
+    - zsh

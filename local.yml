@@ -1,0 +1,35 @@
+- hosts: localhost
+  become: true
+  vars:
+    source_key: "./.ssh/github"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/github"
+    source_config: "./.ssh/config"
+    dest_config: "{{ lookup('env', 'HOME') }}/.ssh/config"
+  pre_tasks:
+    - name: Update cache
+      dnf:
+        update_cache: true
+  tasks:
+    - name: install ssh keys
+      import_tasks: tasks/ssh.yml
+
+    - name: install system packages
+      import_tasks: tasks/system.yml
+
+    - name: install zsh
+      import_tasks: tasks/zsh.yml
+
+    - name: install node
+      import_tasks: tasks/node.yml
+
+    - name: install rust
+      import_tasks: tasks/rust.yml
+
+    - name: install neovim
+      import_tasks: tasks/neovim.yml
+
+    # - name: install docker
+    #   import_tasks: tasks/docker.yml
+
+    - name: install dotfiles
+      import_tasks: tasks/dotfiles.yml
