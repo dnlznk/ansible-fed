@@ -1,3 +1,0 @@
-[submodule ".ssh"]
-	path = .ssh
-	url = https://github.com:sw00nsey/.ssh.git
