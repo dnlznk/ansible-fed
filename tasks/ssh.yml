@@ -7,21 +7,6 @@
     - ssh
     - dotfiles
 
-- name: clone project
-  when: ssh_initialized is failed
-  git:
-    repo: "https://{{gituser}}:{{gitpass}}@github.com/sw00nsey/ansible-fed.git"
-    dest: "../ansible-fed"
-    recursive: true
-    update: true
-    accept_hostkey: true
-    force: true
-    version: main
-  tags:
-    - install
-    - ssh
-    - dotfiles
-
 - name: ensure .ssh exists
   when: ssh_initialized is failed
   become_user: root
