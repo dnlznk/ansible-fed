@@ -8,6 +8,9 @@ ENV TAGS=install
 RUN useradd stanyo
 
 RUN dnf upgrade -y 
-RUN dnf install -y ansible 
+RUN dnf install -y ansible git
+
+RUN git clone https://github.com/sw00nsey/ansible-fed
+RUN cd ansible-fed
 
 ENTRYPOINT [ "bash" ]

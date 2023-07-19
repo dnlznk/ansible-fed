@@ -1,5 +1,7 @@
 - hosts: localhost
   become: true
+  vars_files:
+    - secrets.yml
   vars:
     source_key: "./.ssh/github"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/github"
@@ -10,11 +12,11 @@
       dnf:
         update_cache: true
   tasks:
-    - name: install ssh keys
-      import_tasks: tasks/ssh.yml
-
     - name: install system packages
       import_tasks: tasks/system.yml
+
+    - name: install ssh keys
+      import_tasks: tasks/ssh.yml
 
     - name: install zsh
       import_tasks: tasks/zsh.yml
