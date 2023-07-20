@@ -63,7 +63,7 @@
   when: ssh_initialized is failed
   authorized_key:
     # user: "{{ lookup('env', 'USER') }}"
-    user: {{ user }}
+    user: "{{ user }}"
     state: present
     key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/github.pub') }}"
   tags:
