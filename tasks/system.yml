@@ -1,5 +1,6 @@
 - name: install system packages
-  dnf: name={{item}}
+  dnf:
+    name: '{{ item }}'
   with_items:
     - curl
     - make
@@ -10,10 +11,16 @@
     - gcc
     - unzip
     - gettext
-    - git
     - python3-pip
     - dnf-plugins-core
     - wget
+    - tmux
+    - fzf
+    - xclip
+    - tldr
+    - stow
+    - alacritty
+    - i3
   tags:
     - install
     - system
@@ -30,16 +37,3 @@
     - install
     - system
 
-- name: install other useful packages
-  dnf: name={{item}}
-  with_items: 
-    - tmux
-    - fzf
-    - xclip
-    - tldr
-    - stow
-    - alacritty
-    - i3
-  tags:
-    - install
-    - system

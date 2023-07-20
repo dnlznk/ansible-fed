@@ -9,7 +9,6 @@
 
 - name: ensure .ssh exists
   when: ssh_initialized is failed
-  become_user: root
   file:
     dest: "{{ dest_key | dirname }}"
     mode: 0700
@@ -21,7 +20,6 @@
 
 - name: copy config
   when: ssh_initialized is failed
-  become_user: root
   copy: 
     src: "{{ source_config }}"
     dest: "{{ dest_config }}"
@@ -33,7 +31,6 @@
 
 - name: copy public ssh key
   when: ssh_initialized is failed
-  become_user: root
   copy: 
     src: "{{ source_key }}.pub"
     dest: "{{ dest_key }}.pub"
@@ -45,7 +42,6 @@
 
 - name: copy ssh key
   when: ssh_initialized is failed
-  become_user: root
   copy:
     src: "{{ source_key }}"
     dest: "{{ dest_key }}"
@@ -58,8 +54,8 @@
 - name: set authorized from file
   when: ssh_initialized is failed
   authorized_key:
-    # user: "{{ lookup('env', 'HOME') }}"
-    user: root
+    user: "{{ lookup('env', 'USER') }}"
+    # user: root
     state: present
     key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/github.pub') }}"
   tags:

@@ -1,0 +1,7 @@
+curl
+which
+unzip
+git
+dnf-plugins-core
+wget
+
