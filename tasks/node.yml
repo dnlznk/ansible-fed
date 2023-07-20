@@ -10,8 +10,37 @@
   when: nvim_exists is failed
   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
   args:
-    creates: "/home/{{ ansible_user }}/.nvm/nvm.sh"
+    creates: "{{ lookup('env', 'HOME') }}/.nvm/nvm.sh"
   tags:
+    - install
+    - node
+
+- name: copy nvim dir
+  when: ssh_initialized is failed
+  copy: 
+    src: "/root/.nvm"
+    dest: "{{ lookup('env', 'HOME') }}/.nvm"
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
+  tags: 
+    - install
+    - node
+
+- name: remove nvim dir from root
+  shell: rm -rf /root/.nvim
+  become_user: root
+  tags: 
+    - install
+    - node
+
+- name: copy bashrc
+  when: ssh_initialized is failed
+  copy: 
+    src: "/root/.bashrc"
+    dest: "{{ lookup('env', 'HOME') }}/.bashrc"
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
+  tags: 
     - install
     - node
 
