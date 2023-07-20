@@ -1,6 +1,6 @@
 - name: clone dotfiles
   git:
-    repo: git@github.com:sw00nsey/.dotfiles.git
+    repo: git@github.com:dnlznk/.dotfiles.git
     dest: "{{ lookup('env', 'HOME' )}}/.dotfiles"
     recursive: true
     update: true
