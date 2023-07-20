@@ -5,6 +5,7 @@
     recursive: true
     update: true
     accept_hostkey: true
+    key_file: "{{ dest_key }}"
     force: true
     version: main
   tags:
