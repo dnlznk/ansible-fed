@@ -8,6 +8,7 @@
 
 - name: install zsh
   when: zsh_exists is failed
+  become_user: root
   dnf:
     name: zsh
   tags:

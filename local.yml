@@ -5,6 +5,7 @@
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/github"
     source_config: "./.ssh/config"
     dest_config: "{{ lookup('env', 'HOME') }}/.ssh/config"
+    dest_font: "{{ lookup('env', 'HOME') }}/.local/share/fonts/hasklig"
   pre_tasks:
     - name: Upgrade packages
       become_user: root
@@ -22,6 +23,9 @@
     - name: install system packages
       become_user: root
       import_tasks: tasks/system.yml
+
+    - name: install fonts
+      import_tasks: tasks/font.yml
 
     - name: install zsh
       import_tasks: tasks/zsh.yml

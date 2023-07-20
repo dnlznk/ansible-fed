@@ -1,0 +1,14 @@
+- name: Create new directory
+  shell: mkdir -p {{ dest_font }}
+  tags:
+    - fonts
+
+- name: Download font
+  shell: cd {{ dest_font }} && curl https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hasklig.tar.xz -O - | sudo tar -xz
+  tags:
+    - fonts
+
+- name: Update font cache
+  shell: fc-cache -v
+  tags:
+    - fonts
