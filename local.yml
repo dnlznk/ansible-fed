@@ -21,23 +21,24 @@
       become_user: root
       import_tasks: tasks/system.yml
 
+    - name: install dotfiles
+      import_tasks: tasks/dotfiles.yml
+
     - name: install fonts
       import_tasks: tasks/font.yml
 
     - name: install zsh
       import_tasks: tasks/zsh.yml
 
-    - name: install node
-      import_tasks: tasks/node.yml
-
     - name: install rust
       import_tasks: tasks/rust.yml
-
-    - name: install neovim
-      import_tasks: tasks/neovim.yml
 
     - name: install docker
       import_tasks: tasks/docker.yml
 
-    - name: install dotfiles
-      import_tasks: tasks/dotfiles.yml
+    - name: install node
+      import_tasks: tasks/node.yml
+
+    - name: install neovim
+      import_tasks: tasks/neovim.yml
+

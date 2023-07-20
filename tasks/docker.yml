@@ -8,6 +8,7 @@
 
 - name: add docker repo
   when: docker_exists is failed
+  become_user: root
   shell: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
   tags:
     - install
@@ -15,19 +16,15 @@
 
 - name: install docker
   when: docker_exists is failed
-  dnf: name={{item}}
-  with_items: 
-    - docker-ce
-    - docker-ce-cli
-    - containerd.io
-    - docker-buildx-plugin
-    - docker-compose-plugin
+  dnf:
+    name: docker-ce
   tags:
     - install
     - docker
 
 - name: start docker on boot
   when: docker_exists is failed
+  become_user: root
   shell: systemctl enable docker.service containerd.service
   tags: 
     - install
@@ -35,6 +32,7 @@
 
 - name: add user to docker group
   when: docker_exists is failed
+  become_user: root
   shell: "usermod -aG docker {{ lookup('env', 'USER') }}"
   tags: 
     - install
