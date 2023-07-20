@@ -16,7 +16,7 @@
     - node
 
 - name: copy nvim dir
-  when: ssh_initialized is failed
+  when: nvim_exists is failed
   copy: 
     src: "/root/.nvm"
     dest: "{{ lookup('env', 'HOME') }}/.nvm"
@@ -34,7 +34,7 @@
     - node
 
 - name: copy bashrc
-  when: ssh_initialized is failed
+  when: nvim_exists is failed
   copy: 
     src: "/root/.bashrc"
     dest: "{{ lookup('env', 'HOME') }}/.bashrc"
