@@ -34,6 +34,7 @@
       import_tasks: tasks/rust.yml
 
     - name: install docker
+      become_user: root
       import_tasks: tasks/docker.yml
 
     - name: install node
