@@ -16,6 +16,7 @@
 
 - name: change shell
   shell: chsh -s $(which zsh)
+  become_user: root
   when: zsh_exists is failed
   tags:
     - install
