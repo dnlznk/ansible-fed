@@ -26,7 +26,7 @@
     - { key: "org.gnome.desktop.interface", attribute: "document-font-name", value: "Hasklug Nerd Font 11" }
     - { key: "org.gnome.desktop.interface", attribute: "font-name", value: "Hasklug Nerd Font 11" }
     - { key: "org.gnome.desktop.interface", attribute: "monospace-font-name", value: "Hasklug Nerd Font Mono 11" }
-    - { key: "org.gnome.desktop.vm.preferences", attribute: "titlebar-font", value: "Hasklug Nerd Font Bold 11" }
+    - { key: "org.gnome.desktop.wm.preferences", attribute: "titlebar-font", value: "Hasklug Nerd Font Bold 11" }
   tags:
     - install
     - fonts
