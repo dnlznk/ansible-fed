@@ -8,6 +8,7 @@
 
 - name: add docker repo
   when: docker_exists is failed
+  shell: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
   tags:
     - install
     - docker
