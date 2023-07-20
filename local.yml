@@ -39,8 +39,8 @@
     - name: install neovim
       import_tasks: tasks/neovim.yml
 
-    # - name: install docker
-    #   import_tasks: tasks/docker.yml
+    - name: install docker
+      import_tasks: tasks/docker.yml
 
     - name: install dotfiles
       import_tasks: tasks/dotfiles.yml
