@@ -21,6 +21,7 @@
 
 - name: stow dotfiles
   shell: cd $HOME/.dotfiles && ./linux
+  ignore_errors: true
   tags:
     - install
     - dotfiles
