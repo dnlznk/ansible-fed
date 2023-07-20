@@ -1,14 +1,36 @@
-- name: Create new directory
+- name: create new directory
   shell: mkdir -p {{ dest_font }}
   tags:
+    - install
     - fonts
 
-- name: Download font
-  shell: cd {{ dest_font }} && curl https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hasklig.tar.xz -O - | sudo tar -xz
+- name: download font
+  shell: cd {{ dest_font }} && wget -qO- https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.tar.xz | tar -xJ
+  become_user: root
   tags:
+    - install
     - fonts
 
-- name: Update font cache
+- name: update font cache
   shell: fc-cache -v
   tags:
+    - install
+    - fonts
+
+- name: set gnome fonts
+  shell: "gsettings set {{ item.key }} {{ item.attribute }} {{ item.value }}"
+  loop:
+    - { key: "org.freedesktop.ibus.panel", attribute: "custom-font", value: "Hasklug Nerd Font 10" }
+    - { key: "org.freedesktop.ibus.panel", attribute: "use-custom-font", value: true }
+    - { key: "org.freedesktop.ibus.panel.emoji", attribute: "font", value: "Hasklug Nerd Font Mono 16" }
+    - { key: "org.gnome.Epiphany.web", attribute: "monospace-font", value: "Hasklug Nerd Font Mono 12" }
+    - { key: "org.gnome.Epiphany.web", attribute: "sans-serif-font", value: "Hasklug Nerd Font 12" }
+    - { key: "org.gnome.Epiphany.web", attribute: "serif-font", value: "Hasklug Nerd Font 12" }
+    - { key: "org.gnome.TextEditor", attribute: "custom-font", value: "Hasklug Nerd Font Mono 11" }
+    - { key: "org.gnome.desktop.interface", attribute: "document-font-name", value: "Hasklug Nerd Font 11" }
+    - { key: "org.gnome.desktop.interface", attribute: "font-name", value: "Hasklug Nerd Font 11" }
+    - { key: "org.gnome.desktop.interface", attribute: "monospace-font-name", value: "Hasklug Nerd Font Mono 11" }
+    - { key: "org.gnome.desktop.interface", attribute: "titlebar-font", value: "Hasklug Nerd Font Bold 11" }
+  tags:
+    - install
     - fonts
