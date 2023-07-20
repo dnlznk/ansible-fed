@@ -1,1 +1,2 @@
+sudo dnf install -y ansible
 ansible-playbook --ask-vault-pass local.yml
