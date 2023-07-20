@@ -6,12 +6,21 @@
     - install
     - node
 
+- name: download node version manager
+  when: nvim_exists is failed
+  get_url:
+    url: https://raw.githubusercontent.com/nvm-sh/v0.39.3/install.sh
+    dest: /tmp/nvm-install.sh
+    mode: '0755'
+    force: yes
+  ignore_errors: true
+  tags:
+    - install
+    - node
+
 - name: install node version manager
   when: nvim_exists is failed
-  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-  args:
-    creates: "{{ lookup('env', 'HOME') }}/.nvm/nvm.sh"
-  ignore_errors: true
+  shell: /tmp/nvm-install.sh
   tags:
     - install
     - node

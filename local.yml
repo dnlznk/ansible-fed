@@ -1,11 +1,13 @@
 - hosts: localhost
   become: true
+  become_user: "{{ lookup('env', 'USER') }}"
   vars:
     source_key: "./.ssh/github"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/github"
     source_config: "./.ssh/config"
     dest_config: "{{ lookup('env', 'HOME') }}/.ssh/config"
     dest_font: "{{ lookup('env', 'HOME') }}/.local/share/fonts/hasklig"
+    user: "{{ ansible_user_id }}"
   pre_tasks:
     - name: Update cache
       become_user: root
