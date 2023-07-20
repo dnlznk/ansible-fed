@@ -6,6 +6,11 @@
     source_config: "./.ssh/config"
     dest_config: "{{ lookup('env', 'HOME') }}/.ssh/config"
   pre_tasks:
+    - name: Upgrade packages
+      become_user: root
+      dnf:
+        name: "*"
+
     - name: Update cache
       become_user: root
       dnf:
