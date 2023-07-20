@@ -18,19 +18,21 @@
     - fonts
 
 - name: set gnome fonts
-  shell: "gsettings set {{ item.key }} {{ item.attribute }} {{ item.value }}"
+  shell: "gsettings set {{ item.key }} {{ item.attribute }} '{{ item.value }}'"
   loop:
     - { key: "org.freedesktop.ibus.panel", attribute: "custom-font", value: "Hasklug Nerd Font 10" }
-    - { key: "org.freedesktop.ibus.panel", attribute: "use-custom-font", value: true }
     - { key: "org.freedesktop.ibus.panel.emoji", attribute: "font", value: "Hasklug Nerd Font Mono 16" }
-    - { key: "org.gnome.Epiphany.web", attribute: "monospace-font", value: "Hasklug Nerd Font Mono 12" }
-    - { key: "org.gnome.Epiphany.web", attribute: "sans-serif-font", value: "Hasklug Nerd Font 12" }
-    - { key: "org.gnome.Epiphany.web", attribute: "serif-font", value: "Hasklug Nerd Font 12" }
     - { key: "org.gnome.TextEditor", attribute: "custom-font", value: "Hasklug Nerd Font Mono 11" }
     - { key: "org.gnome.desktop.interface", attribute: "document-font-name", value: "Hasklug Nerd Font 11" }
     - { key: "org.gnome.desktop.interface", attribute: "font-name", value: "Hasklug Nerd Font 11" }
     - { key: "org.gnome.desktop.interface", attribute: "monospace-font-name", value: "Hasklug Nerd Font Mono 11" }
-    - { key: "org.gnome.desktop.interface", attribute: "titlebar-font", value: "Hasklug Nerd Font Bold 11" }
+    - { key: "org.gnome.desktop.vm.preferences", attribute: "titlebar-font", value: "Hasklug Nerd Font Bold 11" }
   tags:
+    - install
+    - fonts
+
+- name: set use custom font
+  shell: gsettings set org.freedesktop.ibus.panel use-custom-font true
+  tags: 
     - install
     - fonts
