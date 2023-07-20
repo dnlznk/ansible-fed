@@ -32,6 +32,7 @@
 - name: install python neovim plugin
   when: neovim_exists is failed
   shell: python3 -m pip install neovim
+  tags: 
     - install
     - neovim
 

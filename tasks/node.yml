@@ -11,47 +11,21 @@
   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
   args:
     creates: "{{ lookup('env', 'HOME') }}/.nvm/nvm.sh"
+  ignore_errors: true
   tags:
-    - install
-    - node
-
-- name: copy nvim dir
-  when: nvim_exists is failed
-  copy: 
-    src: "/root/.nvm"
-    dest: "{{ lookup('env', 'HOME') }}/.nvm"
-    owner: "{{ lookup('env', 'USER') }}"
-    group: "{{ lookup('env', 'USER') }}"
-  tags: 
-    - install
-    - node
-
-- name: remove nvim dir from root
-  shell: rm -rf /root/.nvim
-  become_user: root
-  tags: 
-    - install
-    - node
-
-- name: copy bashrc
-  when: nvim_exists is failed
-  copy: 
-    src: "/root/.bashrc"
-    dest: "{{ lookup('env', 'HOME') }}/.bashrc"
-    owner: "{{ lookup('env', 'USER') }}"
-    group: "{{ lookup('env', 'USER') }}"
-  tags: 
     - install
     - node
 
 - name: install node lts
   shell: "source {{ lookup('env', 'HOME') }}/.bashrc && nvm install --lts"
+  ignore_errors: true
   tags: 
     - install
     - node
 
 - name: install node neovim plugins
   shell: "source {{ lookup('env', 'HOME') }}/.bashrc && npm i -g neovim tree-sitter-cli prettier @johnnymorganz/stylua-bin tsc"
+  ignore_errors: true
   tags:
     - install
     - node
