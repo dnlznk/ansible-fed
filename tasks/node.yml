@@ -7,7 +7,10 @@
     - node
 
 - name: create nvim dir
-  shell: "mkdir -p {{ lookup('env', 'NVIM_DIR') }}"
+  shell: "mkdir -p {{ lookup('env', 'HOME') }}/.nvm"
+  tags: 
+    - install
+    - node
 
 - name: install node version manager
   when: nvim_exists is failed
