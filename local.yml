@@ -7,11 +7,6 @@
     dest_config: "{{ lookup('env', 'HOME') }}/.ssh/config"
     dest_font: "{{ lookup('env', 'HOME') }}/.local/share/fonts/hasklig"
   pre_tasks:
-    - name: Upgrade packages
-      become_user: root
-      dnf:
-        name: "*"
-
     - name: Update cache
       become_user: root
       dnf:
