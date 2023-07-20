@@ -13,6 +13,8 @@
     dest: "{{ dest_key | dirname }}"
     mode: 0700
     state: directory
+    owner: "{{ env.USER }}"
+    group: "{{ env.USER }}"
   tags:
     - install
     - ssh
@@ -23,6 +25,8 @@
   copy: 
     src: "{{ source_config }}"
     dest: "{{ dest_config }}"
+    owner: "{{ env.USER }}"
+    group: "{{ env.USER }}"
     mode: 0644
   tags: 
     - install
@@ -34,6 +38,8 @@
   copy: 
     src: "{{ source_key }}.pub"
     dest: "{{ dest_key }}.pub"
+    owner: "{{ env.USER }}"
+    group: "{{ env.USER }}"
     mode: 0644
   tags: 
     - install
@@ -45,6 +51,8 @@
   copy:
     src: "{{ source_key }}"
     dest: "{{ dest_key }}"
+    owner: "{{ env.USER }}"
+    group: "{{ env.USER }}"
     mode: 0600
   tags: 
     - install
