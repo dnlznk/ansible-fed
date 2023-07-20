@@ -20,7 +20,6 @@
 
 - name: install rust
   when: cargo_exists is failed
-  become_user: root
   shell: /tmp/sh.rustup.rs -y
   tags: 
     - install
