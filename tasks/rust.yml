@@ -8,6 +8,7 @@
 
 - name: download installer
   when: cargo_exists is failed
+  become_user: root
   get_url:
     url: https://sh.rustup.rs
     dest: /tmp/sh.rustup.rs
@@ -19,6 +20,7 @@
 
 - name: install rust
   when: cargo_exists is failed
+  become_user: root
   shell: /tmp/sh.rustup.rs -y
   tags: 
     - install
