@@ -7,6 +7,7 @@
     dest_config: "{{ lookup('env', 'HOME') }}/.ssh/config"
   pre_tasks:
     - name: Update cache
+      become_user: root
       dnf:
         update_cache: true
   tasks:
@@ -14,6 +15,7 @@
       import_tasks: tasks/ssh.yml
 
     - name: install system packages
+      become_user: root
       import_tasks: tasks/system.yml
 
     - name: install zsh

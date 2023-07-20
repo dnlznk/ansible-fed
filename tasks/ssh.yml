@@ -23,8 +23,6 @@
   copy: 
     src: "{{ source_config }}"
     dest: "{{ dest_config }}"
-    owner: "{{ lookup('env', 'USER') }}"
-    group: "{{ lookup('env', 'USER') }}"
     mode: 0644
   tags: 
     - install
@@ -36,8 +34,6 @@
   copy: 
     src: "{{ source_key }}.pub"
     dest: "{{ dest_key }}.pub"
-    owner: "{{ lookup('env', 'USER') }}"
-    group: "{{ lookup('env', 'USER') }}"
     mode: 0644
   tags: 
     - install
@@ -49,8 +45,6 @@
   copy:
     src: "{{ source_key }}"
     dest: "{{ dest_key }}"
-    owner: "{{ lookup('env', 'USER') }}"
-    group: "{{ lookup('env', 'USER') }}"
     mode: 0600
   tags: 
     - install
@@ -60,8 +54,8 @@
 - name: set authorized from file
   when: ssh_initialized is failed
   authorized_key:
-    user: "{{ lookup('env', 'USER') }}"
-    # user: root
+    # user: "{{ lookup('env', 'USER') }}"
+    user: root
     state: present
     key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/github.pub') }}"
   tags:

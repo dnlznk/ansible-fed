@@ -21,6 +21,9 @@
     - stow
     - alacritty
     - i3
+    - ripgrep
+    - fd-find
+    - g++
   tags:
     - install
     - system

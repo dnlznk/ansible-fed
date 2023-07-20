@@ -32,13 +32,6 @@
 - name: install python neovim plugin
   when: neovim_exists is failed
   shell: python3 -m pip install neovim
-
-- name: install packages needed for neovim
-  dnf: name={{ item }}
-  with_items:
-    - ripgrep
-    - fd-find
-    - g++
-  tags:
     - install
     - neovim
+
