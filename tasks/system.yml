@@ -65,8 +65,8 @@
     - install
     - system
 
-- name: install nvidia driver
-  shell: dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda
-  tags:
-    - install
-    - system
+# - name: install nvidia driver
+#   shell: dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda
+#   tags:
+#     - install
+#     - system
