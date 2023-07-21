@@ -59,6 +59,12 @@
     - install
     - system
 
+- name: install brave browser
+  shell: flatpak install -y com.brave.browser
+  tags:
+    - install
+    - system
+
 - name: install nvidia driver
   shell: dnf install akmod-nvidia
   tags:
