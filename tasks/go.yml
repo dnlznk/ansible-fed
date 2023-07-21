@@ -4,3 +4,9 @@
   tags: 
     - install
     - go
+
+- name: install gopls language server
+  shell: go install golang.org/x/tools/gopls@latest
+  tags:
+    - install
+    - go
