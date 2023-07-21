@@ -1,0 +1,6 @@
+- name: install go
+  become_user: root
+  shell: dnf install go
+  tags: 
+    - install
+    - go
