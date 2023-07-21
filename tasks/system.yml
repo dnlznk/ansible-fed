@@ -47,3 +47,20 @@
     - install
     - system
 
+- name: add flatpak repository
+  shell: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  tags:
+    - install
+    - system
+
+- name: install spotify
+  shell: flatpak install -y com.spotify.Client
+  tags: 
+    - install
+    - system
+
+- name: install nvidia driver
+  shell: dnf install akmod-nvidia
+  tags:
+    - install
+    - system
