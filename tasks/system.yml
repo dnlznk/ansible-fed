@@ -60,7 +60,7 @@
     - system
 
 - name: install brave browser
-  shell: flatpak install -y com.brave.browser
+  shell: flatpak install -y com.brave.Browser
   tags:
     - install
     - system
