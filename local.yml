@@ -40,6 +40,9 @@
     - name: install node
       import_tasks: tasks/node.yml
 
+    - name: install go
+      import_tasks: tasks/go.yml
+
     - name: install neovim
       import_tasks: tasks/neovim.yml
 
