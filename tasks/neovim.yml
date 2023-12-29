@@ -17,7 +17,7 @@
 
 - name: build neovim
   when: neovim_exists is failed
-  shell: "cd {{ lookup('env', 'HOME') }}/.neovim && git checkout tags/v0.9.1 && make CMAKE_BUILD_TYPE=Release"
+  shell: "cd {{ lookup('env', 'HOME') }}/.neovim && git checkout tags/v0.9.4 && make CMAKE_BUILD_TYPE=Release"
   tags:
     - install
     - neovim
